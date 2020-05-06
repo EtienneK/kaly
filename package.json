@@ -6,17 +6,25 @@
   "scripts": {
     "dev": "nodemon server.js",
     "start": "node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "nyc mocha **/*.spec.js --timeout=10000 --exit"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^4.0.1",
+    "crypto": "^1.0.1",
     "express": "^4.17.1",
     "helmet": "^3.22.0",
     "mongodb": "^3.5.7",
-    "oidc-provider": "^6.25.0"
+    "mongoose": "^5.9.12",
+    "oidc-provider": "^6.25.0",
+    "passport": "^0.4.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.3"
+    "chai": "^4.2.0",
+    "mocha": "^7.1.2",
+    "nodemon": "^2.0.3",
+    "nyc": "^15.0.1",
+    "sinon": "^9.0.2"
   }
 }
