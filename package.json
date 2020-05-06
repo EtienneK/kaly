@@ -1,0 +1,22 @@
+{
+  "name": "kaly",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "helmet": "^3.22.0",
+    "mongodb": "^3.5.7",
+    "oidc-provider": "^6.25.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3"
+  }
+}
