@@ -18,7 +18,7 @@ module.exports = {
       client_id: 'oidc-client',
       client_secret: 'oidc-client-secret',
       grant_types: ['refresh_token', 'authorization_code'],
-      redirect_uris: ['http://localhost:3000/oidc-redirect-url'],
+      redirect_uris: ['http://localhost:3000/authn/oidc/'],
     }
   ],
   interactions: {

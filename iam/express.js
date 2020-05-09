@@ -9,9 +9,10 @@ const helmet = require('helmet');
 
 const { Provider } = require('oidc-provider');
 
-const Account = require('./support/account');
-const configuration = require('./support/configuration');
-const routes = require('./routes/express');
+const Account = require('./oidc/support/account');
+const configuration = require('./oidc/support/configuration');
+const routes = require('./oidc/routes/express');
+const iamRouter = require('./router');
 
 const { PORT = 3000, ISSUER = `http://localhost:${PORT}` } = process.env;
 configuration.findAccount = Account.findAccount;
@@ -19,14 +20,18 @@ configuration.findAccount = Account.findAccount;
 const app = express();
 app.use(helmet());
 
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+app.set('views', [ path.join(__dirname, 'account/views') ]);
+
+app.set('view engine', [ 'pug', 'ejs' ]);
+
+app.use('/iam', iamRouter);
 
 let server;
 (async () => {
+
   let adapter;
   if (process.env.MONGODB_URI) {
-    adapter = require('./adapters/mongodb'); // eslint-disable-line global-require
+    adapter = require('./oidc/adapters/mongodb'); // eslint-disable-line global-require
     await adapter.connect();
   }
 
@@ -58,7 +63,7 @@ let server;
 
   routes(app, provider);
   app.use(provider.callback);
-  server = app.listen(PORT, () => {
+  server = await app.listen(PORT, () => {
     console.log(`application is listening on port ${PORT}, check its /.well-known/openid-configuration`);
   });
 })().catch((err) => {
