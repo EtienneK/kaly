@@ -1,6 +1,7 @@
 const express = require('express');
 const session = require('express-session');
 const flash = require('express-flash');
+const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo')(session);
 
 const passport = require('passport');
@@ -14,8 +15,7 @@ router.use(session({
   secret: 'secret134566',
   cookie: { maxAge: 1209600000 }, // two weeks in milliseconds
   store: new MongoStore({
-    url: process.env.MONGODB_URI,
-    autoReconnect: true,
+    mongooseConnection: mongoose.connection
   })
 }));
 router.use(passport.initialize());

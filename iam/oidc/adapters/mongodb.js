@@ -1,10 +1,7 @@
-/* eslint-disable max-classes-per-file */
-
-// npm i mongodb@^3.0.0
-const { MongoClient } = require('mongodb'); // eslint-disable-line import/no-unresolved
+const mongoose = require('mongoose');
 const snakeCase = require('lodash/snakeCase');
 
-let DB;
+let DB = mongoose.connection;
 
 const grantable = new Set([
   'access_token',
@@ -120,15 +117,6 @@ class MongoAdapter {
 
   static coll(name) {
     return DB.collection(name);
-  }
-
-  // This is not part of the required or supported API, all initialization should happen before
-  // you pass the adapter to `new Provider`
-  static async connect() {
-    const connection = await MongoClient.connect(process.env.MONGODB_URI, {
-      useNewUrlParser: true,
-    });
-    DB = connection.db(connection.s.options.dbName);
   }
 }
 
