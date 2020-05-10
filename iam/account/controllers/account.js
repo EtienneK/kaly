@@ -19,7 +19,7 @@ exports.postRegister = (req, res, next) => {
 
   if (validationErrors.length) {
     req.flash('errors', validationErrors);
-    return res.redirect('/register');
+    return res.redirect('/iam/account/register');
   }
   req.body.email = validator.normalizeEmail(req.body.email, { gmail_remove_dots: false });
 
@@ -32,7 +32,7 @@ exports.postRegister = (req, res, next) => {
     if (err) { return next(err); }
     if (existingUser) {
       req.flash('errors', { msg: 'Account with that email address already exists.' });
-      return res.redirect('/register');
+      return res.redirect('/iam/account/register');
     }
     user.save((err) => {
       if (err) { return next(err); }

@@ -6,7 +6,7 @@ html
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     meta(name='theme-color' content='#4DA5F4')
     meta(name='csrf-token', content=_csrf)
-    title #{title} - Hackathon Starter
+    title #{title} - Kaly
     link(rel='shortcut icon', href='/favicon.png')
     link(rel='stylesheet', href='/iam/account/css/main.css')
     block head
@@ -14,11 +14,12 @@ html
   body
     include partials/header
 
-    .container
+    .container.account
       include partials/flash
+      .text-center
+        a(href='/')
+          img.mt-4.mb-4(src='' alt='' width='72' height='72')
       block content
-
-    include partials/footer
 
     script(src='/iam/account/js/lib/jquery.min.js')
     script(src='/iam/account/js/lib/bootstrap.min.js')

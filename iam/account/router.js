@@ -1,3 +1,4 @@
+const bodyParser = require('body-parser');
 const express = require('express');
 const session = require('express-session');
 const flash = require('express-flash');
@@ -11,6 +12,7 @@ const sass = require('node-sass-middleware');
 
 const router = express.Router();
 
+router.use(bodyParser.urlencoded({ extended: true }));
 router.use(session({
   resave: true,
   saveUninitialized: true,
@@ -38,5 +40,6 @@ router.use('/webfonts', express.static(path.join(fortawesomePath, 'webfonts'), {
 
 const accountController = require('./controllers/account');
 router.get('/register', accountController.getRegister);
+router.post('/register', accountController.postRegister);
 
 module.exports = router;
